@@ -2,8 +2,23 @@ docker run -d --name tf -v $(pwd)/:/terraform -v $(pwd)/../expaas:/root/.ssh  -v
 trf="docker exec tf terraform"
 
 
+ssh-keygen -y -f ../expaas/deployer >deployer.pem
+
 $trf plan
 $trp apply
 
-ansible all -i plugins/inventory/terraform.py -m ping
+#export ANSIBLE_HOST_KEY_CHECKING=False
+cp ../expaas/deployer ~/.ssh/deployer
+ansible all --private-key ../expaas/deployer -i plugins/inventory/terraform.py -m ping
+
+ansible-playbook --private-key ../expaas/deployer -i plugins/inventory/terraform.py -e @security.yml terraform.yml 
+
+Reboot:
+ansible-playbook --private-key ../expaas/deployer  playbooks/reboot-hosts.yml
+
+HELLO_WORLD:
+
+curl -k -L --insecure --user admin:admin  https://mantl-elb-415589362.us-east-1.elb.amazonaws.com/marathon/v2/apps/ -X POST   -d @hello.json -H "Content-type: application/json"
+
+curl -s "http://localhost:80"  --header 'Host: hello.dogengine.in'
 
