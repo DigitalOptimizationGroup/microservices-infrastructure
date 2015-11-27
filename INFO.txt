@@ -2,6 +2,8 @@ docker run -d --name tf -v $(pwd)/:/terraform -v $(pwd)/../expaas:/root/.ssh  -v
 trf="docker exec tf terraform"
 
 
+ssh-keygen -y -f ../expaas/deployer >deployer.pem
+
 $trf plan
 $trp apply
 
