@@ -1,0 +1,9 @@
+docker run -d --name tf -v $(pwd)/:/terraform -v /root/.ssh:/root/.ssh  -v /home/ubuntu/.aws:/root/.aws dogestry.in/digitaloptgroup/terraform /bin/bash -c 'while true;do sleep 1000;done'
+trf="docker exec tf terraform"
+
+
+$trf plan
+$trp apply
+
+ansible all -i plugins/inventory/terraform.py -m ping
+
