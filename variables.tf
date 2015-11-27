@@ -9,4 +9,4 @@ variable sub_domain {default=""}
 variable hosted_zone_id { default="Z18CFOC2QHH7FA"}
 
 variable aws_region {default="us-east-1"}
-variable ssh_key {default = "/home/ubuntu/microservices-infrastructure/expaas/deployer"}
+variable ssh_key {default = "deployer"}
