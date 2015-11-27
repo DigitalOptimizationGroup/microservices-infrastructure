@@ -6,6 +6,6 @@ variable az { default="us-east-1e"}
 
 variable domain {default="dogengine.in"}
 variable sub_domain {default=""}
-hosted_zone_id { default="Z18CFOC2QHH7FA"}
+variable hosted_zone_id { default="Z18CFOC2QHH7FA"}
 
 variable aws_region {default="us-east-1"}
